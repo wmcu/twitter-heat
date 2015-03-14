@@ -8,4 +8,4 @@
 venv
 
 # cred
-my_db.py
+cred_*.py

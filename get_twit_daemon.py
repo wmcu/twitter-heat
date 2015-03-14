@@ -1,16 +1,12 @@
 import tweepy
 import sys
 import psycopg2
-import my_db
 import re
 from word_list import words
+import cred_db as my_db
+import cred_twitter as twc
 
 
-# Twitter credential
-consumer_key = 'd5qhU69TNYmuT608SPk7Wy5VZ'
-consumer_secret = 'QuJziBDzwwss8P5WatwdZigCvhB5r2tphRbvWGOaKZ3RcY1cil'
-access_token = '3019121609-3U2LQvT4XNYuWeX0SkSW7WdKhQlnF5JqP9lIemh'
-access_token_secret = '3Q9jVLQaULyu2Kj0QEYgxzVvqURYZetTl1naOCi6ycxZl'
 # Database connection
 conn = None
 cur = None
@@ -82,8 +78,8 @@ def main():
         password=my_db.paswd
     )
     cur = conn.cursor()
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
+    auth = tweepy.OAuthHandler(twc.consumer_key, twc.consumer_secret)
+    auth.set_access_token(twc.access_token, twc.access_token_secret)
     sapi = tweepy.streaming.Stream(auth, CustomStreamListener())
     sapi.filter(locations=[-130, -60, 70, 60])
 
