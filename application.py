@@ -1,18 +1,11 @@
 from flask import Flask, jsonify, render_template, request, url_for
 import psycopg2
-import subprocess
-import my_db
-import sys
-import os
+import cred_db as my_db
 from word_list import words
 
 
-# Create an Flask app object.  We'll use this to create the routes.
+# Create an Flask app object.
 application = app = Flask(__name__)
-app.config['DEBUG'] = True
-
-
-#MY_URL = r'http://localhost:5000'
 
 # Database connection
 conn = None
@@ -80,4 +73,4 @@ def internal_server_error(error):
 # If the user executed this python file (typed `python app.py` in their
 # terminal), run our app.
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)

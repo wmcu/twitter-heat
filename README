@@ -1,0 +1,31 @@
+twitter-heat
+============
+
+This app is written by python, using Flask web framework, PostgreSQL database.
+
+Files:
+application.py -- main script for web server
+get_twit_daemon.py -- daemon for collecting twit stream
+my_db.py -- dabatase account
+twitter_cred.py -- twitter api key
+word_list.py -- list of keywords
+static/ -- .js and .css
+templates/ -- HTML template
+
+Workflow of daemon:
+I use twitter stream api (supported by `tweepy') to collect twits, keeping
+those having geo-tag and containing any keyword. And these selected twit and
+their geo-tag(longitude, latitude) are inserted into PostgreSQL database.
+Meanwhile, if there are too many records in database, some oldest records are
+deleted.
+
+Workflow of web server and client:
+A Google heatmap is loaded on GET request to the `/', and an update() javascript
+function is set to run every second. The update() function use AJAX (supported
+by JQuery) to poll latest twitter geo-tags by GET request to `/data/<keyword>',
+then update the heatmap.
+There is a drop-down list in the home page for user to select different keywords
+from a set of fixed keyword list (specified by `word_list.txt'). The default
+option is `-ALL-', that is, all keywords are selected.
+The server, on GET request to `/data/<keyword>', select the latest 500 records
+from database and return the geo-tags of those containing `keyword'.

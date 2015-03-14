@@ -1,5 +1,4 @@
 import tweepy
-import sys
 import psycopg2
 import re
 from word_list import words
@@ -80,13 +79,17 @@ def main():
     cur = conn.cursor()
     auth = tweepy.OAuthHandler(twc.consumer_key, twc.consumer_secret)
     auth.set_access_token(twc.access_token, twc.access_token_secret)
-    sapi = tweepy.streaming.Stream(auth, CustomStreamListener())
-    sapi.filter(locations=[-130, -60, 70, 60])
-
+    while True:
+        try:
+            sapi = tweepy.streaming.Stream(auth, CustomStreamListener())
+            sapi.filter(locations=[-130, -60, 70, 60])
+        except:
+            continue
 
 '''
 Usage:
 python get_twit_daemon.py
 '''
 if __name__ == '__main__':
+    # import sys
     main()
