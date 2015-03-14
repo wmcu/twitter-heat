@@ -1,0 +1,11 @@
+# AWS eb
+.elasticbeanstalk/
+*.pyc
+*.zip
+
+# Virtualenv
+.Python
+venv
+
+# cred
+my_db.py

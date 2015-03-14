@@ -1,0 +1,27 @@
+html, body, #map-canvas{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  overflow-y:hidden;
+}
+
+main{
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  overflow: hidden;
+}
+
+#nav{
+  height: 10%;
+  width: 100%;
+  background: white;
+  color: #c41200;
+  text-align: center;
+}
+
+#nav-keyword{
+}

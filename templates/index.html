@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="text/javascript"
+      src="{{ url_for('static', filename='jquery.min.js') }}">
+    </script>
+    <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true_or_false?key=AIzaSyAuDjoxQgamvdu8TMzot9wT9KFJmSvXPYg">
+    </script>
+    <script type="text/javascript"
+      src="{{ url_for('static', filename='my.js') }}">
+    </script>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <title>Twitter Heat</title>
+  </head>
+  <body>
+    <table id="nav">
+      <tr>
+        <td>Twitter Heat Map</td>
+        <td id="nav-keyword">
+          Select keyword:
+          <select id="keyword">
+            <option value="-ALL-" selected>-ALL-</option>
+          {% for item in api_data["keywords"] %}
+            <option value="{{ item }}">{{ item }}</option>
+          {% endfor %}
+          </select>
+        </td>
+      </tr>
+    </table>
+    <div id="map-canvas"></div>
+  </body>
+</html>
